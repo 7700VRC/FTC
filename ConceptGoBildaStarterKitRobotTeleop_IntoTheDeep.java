@@ -73,6 +73,8 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
     /* Declare OpMode members. */
     public DcMotor  leftDrive   = null; //the left drivetrain motor
     public DcMotor  rightDrive  = null; //the right drivetrain motor
+    public DcMotor  leftDriveBack   = null; //the left drivetrain motor
+    public DcMotor  rightDriveBack  = null; //the right drivetrain motor
     public DcMotor  armMotor    = null; //the arm motor
     public CRServo  intake      = null; //the active intake servo
     public Servo    wrist       = null; //the wrist servo
@@ -145,6 +147,8 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
         /* Define and Initialize Motors */
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        leftDriveBack  = hardwareMap.get(DcMotor.class, "left_drive_back");
+        rightDriveBack = hardwareMap.get(DcMotor.class, "right_drive_back");
         armMotor    = hardwareMap.get(DcMotor.class, "the_arm");
 
 
@@ -152,13 +156,17 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
         for this robot, we reverse the right motor.*/
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDriveBack.setDirection(DcMotor.Direction.FORWARD);
+        rightDriveBack.setDirection(DcMotor.Direction.REVERSE);
 
 
         /* Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to slow down
         much faster when it is coasting. This creates a much more controllable drivetrain. As the robot
         stops much quicker. */
-        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST;
+        leftDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST);
+        rightDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST;
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         /*This sets the maximum current that the control hub will apply to the arm before throwing a flag */
@@ -193,20 +201,15 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
 
             /* Set the drive and turn variables to follow the joysticks on the gamepad.
             the joysticks decrease as you push them up. So reverse the Y axis. */
-            left = -gamepad1.left_stick_y;
-            right  = -gamepad1.right_stick_y;
+            left_y = -gamepad1.left_stick_y;
+            left_x = -gamepad1.left_stick_x;
+            right_x  = -gamepad1.right_stick_y;
 
 
-            /* Here we "mix" the input channels together to find the power to apply to each motor.
-            The both motors need to be set to a mix of how much you're retesting the robot move
-            forward, and how much you're requesting the robot turn. When you ask the robot to rotate
-            the right and left motors need to move in opposite directions. So we will add rotate to
-            forward for the left motor, and subtract rotate from forward for the right motor. */
+            
 
-
-            /* Set the motor power to the variables we've mixed and normalized */
-            leftDrive.setPower(left);
-            rightDrive.setPower(right);
+            /* Set the motor power to the variables we've mixed and normalized call drive function*/
+            driveMechanum(left_y,left_x,right_x);
 
 
 
@@ -345,4 +348,27 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
 
         }
     }
+    public void driveMechanum(double y, double x, double spin) {
+        leftDrive.setPower();
+        rightDrive.setPower();
+        leftDriveBack.setPower();
+        rightDriveBack.setPower();
+        sleep(10);
+         }
+    public void driveTank(double leftSpeed, double rightSpeed) {
+        leftDrive.setPower(leftSpeed);
+        rightDrive.setPower(rightSpeed);
+        sleep(10);
+         }
+
+    public void stopDriveBrake() {
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
+        leftDriveBack.setPower(0);
+        rightDriveBack.setPower(0);
+        }        
 }
