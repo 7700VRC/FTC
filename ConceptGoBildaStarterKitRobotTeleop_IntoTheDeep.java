@@ -68,7 +68,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 @TeleOp(name="FTC Starter Kit Example Robot (INTO THE DEEP)", group="Robot")
 //@Disabled
-public class mechdrivecode_seabass extends LinearOpMode {
+public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMode {
 
     /* Declare OpMode members. */
     public DcMotor  leftDrive   = null; //the left drivetrain motor
@@ -142,10 +142,6 @@ public class mechdrivecode_seabass extends LinearOpMode {
         double forward;
         double rotate;
         double max;
-        double left_y;
-        double left_x;
-        double right_y;
-        double right_x;
 
 
         /* Define and Initialize Motors */
@@ -153,13 +149,13 @@ public class mechdrivecode_seabass extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         leftDriveBack  = hardwareMap.get(DcMotor.class, "left_drive_back");
         rightDriveBack = hardwareMap.get(DcMotor.class, "right_drive_back");
-        //armMotor    = hardwareMap.get(DcMotor.class, "the_arm");
+        armMotor    = hardwareMap.get(DcMotor.class, "the_arm");
 
 
         /* Most skid-steer/differential drive robots require reversing one motor to drive forward.
         for this robot, we reverse the right motor.*/
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDriveBack.setDirection(DcMotor.Direction.FORWARD);
         rightDriveBack.setDirection(DcMotor.Direction.REVERSE);
 
@@ -167,10 +163,10 @@ public class mechdrivecode_seabass extends LinearOpMode {
         /* Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to slow down
         much faster when it is coasting. This creates a much more controllable drivetrain. As the robot
         stops much quicker. */
-        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST;
+        leftDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST);
+        rightDriveBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.COAST;
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         /*This sets the maximum current that the control hub will apply to the arm before throwing a flag */
