@@ -202,8 +202,8 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
             /* Set the drive and turn variables to follow the joysticks on the gamepad.
             the joysticks decrease as you push them up. So reverse the Y axis. */
             left_y = -gamepad1.left_stick_y;
-            left_x = -gamepad1.left_stick_x;
-            right_x  = -gamepad1.right_stick_y;
+            left_x = gamepad1.left_stick_x;
+            right_x  = gamepad1.right_stick_x;
 
 
             
@@ -349,12 +349,14 @@ public class ConceptGoBildaStarterKitRobotTeleop_IntoTheDeep extends LinearOpMod
         }
     }
     public void driveMechanum(double y, double x, double spin) {
-        leftDrive.setPower();
-        rightDrive.setPower();
-        leftDriveBack.setPower();
-        rightDriveBack.setPower();
-        sleep(10);
+        leftDrive.setPower(y+x+spin);
+        leftDriveBack.setPower(y-x+spin);
+        rightDrive.setPower(y-x-spin);
+        rightDriveBack.setPower(y+x-spin);
+        sleep(10); 
          }
+        //right = positive, up = positive, left = negative, down = negative, s = super duper more awesome
+        // than grandma grandpas and other peeps, sydney p.s. no one likes dand
     public void driveTank(double leftSpeed, double rightSpeed) {
         leftDrive.setPower(leftSpeed);
         rightDrive.setPower(rightSpeed);
