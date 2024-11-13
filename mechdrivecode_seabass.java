@@ -79,7 +79,7 @@ public class mechdrivecode_seabass extends LinearOpMode {
     public CRServo  intake      = null; //the active intake servo
     public Servo    wrist       = null; //the wrist servo
 
-
+    public double ArmTarget = 0.0;
     /* This constant is the number of encoder ticks for each degree of rotation of the arm.
     To find this, we first need to consider the total gear reduction powering our arm.
     First, we have an external 20t:100t (5:1) reduction created by two spur gears.
@@ -241,6 +241,8 @@ public class mechdrivecode_seabass extends LinearOpMode {
                 intake.setPower(INTAKE_DEPOSIT);
             }
 
+            armPcontroller();
+
 
 
             /* Here we implement a set of if else statements to set our arm to different scoring positions.
@@ -249,7 +251,7 @@ public class mechdrivecode_seabass extends LinearOpMode {
             to start collecting. So it moves the armPosition to the ARM_COLLECT position,
             it folds out the wrist to make sure it is in the correct orientation to intake, and it
             turns the intake on to the COLLECT mode.*/
-            armMotor.setPower(0);
+            //armMotor.setPower(0);
 
             if(gamepad1.right_bumper){
                 /* This is the intaking/collecting arm position */
@@ -376,5 +378,16 @@ public class mechdrivecode_seabass extends LinearOpMode {
         rightDrive.setPower(0);
         leftDriveBack.setPower(0);
         rightDriveBack.setPower(0);
-        }        
+        }   
+        
+    public void armPcontroller(){
+        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        double armPosition= (arm.getCurrentPosition())/ARM_TICKS_PER_DEGREES;
+        double error = ArmTarget - armPosition;
+        double kp=1.0;
+        double speed=kp*error;
+        armMotor.setPower(speed);
+        
+
+    }
 }
