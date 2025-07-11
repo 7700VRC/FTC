@@ -45,9 +45,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
  */
 
 
-@TeleOp(name="Drive-Tele", group="Robot")
+@TeleOp(name="Drive", group="Robot")
 //@Disabled
-public class Drive_Tele extends LinearOpMode {
+public class Drive extends LinearOpMode {
 
     /* Declare OpMode members. */
     public DcMotor  leftDrive   = null; //the left drivetrain motor
@@ -101,16 +101,15 @@ public class Drive_Tele extends LinearOpMode {
 
             //call the drive funtion to make the robot move:
             driveTank(left,right,10);  // move for 10 msec before checking for a new speed input
-
-
-           
         }
-        public void driveTank(double leftSpeed, double rightSpeed, double wt) {
+    
+    }
+
+        public void driveTank(double leftSpeed, double rightSpeed,long wt) {
         leftDrive.setPower(leftSpeed);
         rightDrive.setPower(rightSpeed);
         sleep(wt);
          }
-
-       
-    }
+    
+    
 }
