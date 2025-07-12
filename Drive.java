@@ -24,12 +24,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 /*
  * This OpMode is an example driver-controlled (TeleOp) mode for the goBILDA 2024-2025 FTC
@@ -62,25 +58,20 @@ public class Drive extends LinearOpMode {
         double left;
         double right;
 
-
-
         /* Define and Initialize Motors */
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive"); //the left drivetrain motor
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive"); //the right drivetrain motor
        
-
         /* Most skid-steer/differential drive robots require reversing one motor to drive forward.
         for this robot, we reverse the right motor.*/
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
-
 
         /* Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to slow down
         much faster when it is coasting. This creates a much more controllable drivetrain. As the robot
         stops much quicker. */
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-       
        
         /* Send telemetry message to signify robot waiting */
         telemetry.addLine("Robot Ready.");
@@ -105,9 +96,9 @@ public class Drive extends LinearOpMode {
     
     }
 
-        public void driveTank(double leftSpeed, double rightSpeed,long wt) {
-        leftDrive.setPower(leftSpeed);
-        rightDrive.setPower(rightSpeed);
+        public void driveTank(double leftPower, double rightPower,long wt) {
+        leftDrive.setPower(leftPower);
+        rightDrive.setPower(rightPower);
         sleep(wt);
          }
     
